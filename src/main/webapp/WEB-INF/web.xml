@@ -1,0 +1,57 @@
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+                             http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         version="3.0">
+    <!-- display-name은 web.xml의 title -->
+    <display-name>spring-mvc-demo</display-name>
+    <!-- request/response에 대해 encoding 설정 -->
+    <filter>
+        <filter-name>encodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>*.do</url-pattern>
+    </filter-mapping>
+
+    <!-- ContextLoaderListener를 통해 아래 contextConfigLocation에 정의되어 있는
+         /WEB-INF/config/spring/root-servlet.xml을 읽어와서 Root WebApplicationContext를 생성한다.
+
+         WAC(WebApplicationContext)가 2개 이상이면 모든 WAC에서 공유해야할 Bean을 등록하기 위해 사용하는 게 좋으나
+         WAC가 1개라면 굳이 Root WAC를 쓰는 이유는 없다.
+
+         http://toby.epril.com/?p=934 참고
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+            /WEB-INF/config/spring/root-servlet.xml
+        </param-value>
+    </context-param>
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    -->
+
+    <!-- DispatcherServlet을 통해 아래 contextConfigLocation에 정의되어 있는
+        /WEB-INF/config/spring/dispatcher-servlet.xml을 읽어와서 WebApplicationContext를 생성한다.
+        Root WAC를 생성하지 않았기 때문에
+    -->
+    <servlet>
+        <servlet-name>action</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>/WEB-INF/config/spring/dispatcher-servlet.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>action</servlet-name>
+        <url-pattern>*.do</url-pattern>
+    </servlet-mapping>
+</web-app>

@@ -4,9 +4,48 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.example</groupId>
+    <groupId>org.hun</groupId>
     <artifactId>spring-mvc-demo</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
 
+    <name>spring-mvc-demo</name>
+    <description>spring mvc demo</description>
 
+    <!-- properties는 상수값을 정의 할 때 사용
+         properties에 정의된 값은 ${}를 사용해서 참조가능
+     -->
+    <properties>
+        <spring.maven.artifact.version>5.2.4.RELEASE</spring.maven.artifact.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <dependencies>
+        <!--- Spring Start-->
+        <!-- Spring-webmvc는 spring-core, spring-context, spring-web, spring-aop, spring-beans, spring-expression 에 대해 의존성을 가지고 있다.-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring.maven.artifact.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <!-- finalName은 build 산출물 이름  -->
+        <finalName>spring-mvc-demo</finalName>
+        <plugins>
+            <plugin>
+                <!-- maven-compiler-plugin을 사용해서 특정 버전의 JDK로 빌드 할 수 있다. -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
