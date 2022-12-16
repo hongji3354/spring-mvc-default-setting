@@ -16,7 +16,7 @@
          properties에 정의된 값은 ${}를 사용해서 참조가능
      -->
     <properties>
-        <spring.maven.artifact.version>5.2.4.RELEASE</spring.maven.artifact.version>
+        <spring.maven.artifact.version>5.2.20.RELEASE</spring.maven.artifact.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
         <tomcat.version>8.5.23</tomcat.version>
